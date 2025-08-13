@@ -671,7 +671,29 @@ case 'menu': {
                     });     
                     break;     
                 }
+                case 'ig': {
+                if (!q) return m.reply('❌ කරුණාකර Instagram post link එකක් දෙන්න.\nඋදා: !ig https://www.instagram.com/p/xxxxx');
 
+                 const axios = require('axios');
+
+                  try {
+        // Free Instagram downloader API
+        const apiUrl = `https://vihangayt.me/download/instagram?url=${encodeURIComponent(q)}`;
+        const res = await axios.get(apiUrl);
+
+        if (res.data.status && res.data.data && res.data.data.length > 0) {
+            let caption = `📥 *Instagram Download*\n\n${res.data.data[0].url}`;
+            await m.reply(caption);
+        } else {
+            m.reply('⚠️ Download link හමු නොවීය. Link එක check කරන්න.');
+        }
+
+    } catch (err) {
+        console.error(err);
+        m.reply('❌ Instagram video/photo ලබා ගැනීමට නොහැකි විය.');
+    }
+}
+break;
                 // SYSTEM COMMAND
                 case 'system': {
                     const startTime = socketCreationTime.get(number) || Date.now();
